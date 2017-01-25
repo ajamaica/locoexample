@@ -1,24 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-</head>
-<body class="container">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <header>
+    <title>Locomote Example</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/style.css" rel="stylesheet"  type="text/css">
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+  </head>
+
+  <body >
+
+    
+
+    <section class="flights text-center">
+      <div class="container">
+        <h1 class="flights-heading">Locomote</h1>
+        <div id="searchbox" >
+					<input type="text" placeholder="From" name="from" autocomplete="off"/> <input type="text" placeholder="To" name="to" autocomplete="off"/> <input type="date" name="daterange"  />
+					<input type="submit"  id="search_now" value="Search Now">
+				</div>
+      </div>
+    </section>
+
+    <div class="album text-muted">
+      <div class="container">
+					
+				 <div id="tabs-with-dates" >
+				    <ul class="nav nav-tabs" id="tabs_render" role="tablist">
+						    
+						   
+						</ul>
+				 </div>
         
-    </header>
-
-    <main>
-        <div class="jumbotron">
-            <h1>This is great</h1>
-            <p>Welcome to templating using EJS</p>
+				<div class="row" id="results">
+	
+          
+         
         </div>
-    </main>
 
-    <footer>
+      </div>
+    </div>
+
+    <footer class="text-muted">
+      <div class="container">
        
+      </div>
     </footer>
-    
-</body>
+		<!-- class="active" -->
+		
+		<script id="tabday" type="x-tmpl-mustache">
+				<li role="presentation" class="datetab" rel="{{index}}" ><a href="#" role="tab" data-toggle="tab">{{name}}</a></li>
+		</script>
+	
+		<script id="template" type="x-tmpl-mustache">
+
+						<div class="col-lg-3 col-sm-6">
+									
+			            <div class="card hovercard">
+			                
+			                <div class="info">
+			                    <div class="title">
+															
+			                        ${{price}} USD
+			                    </div>
+													<!-- Need Format-->
+			                    <div class="desc">{{airline}} ({{code}}) #{{flightNum}}</div>
+			                    <div class="desc">{{durationMin}}</div>
+			                    <div class="desc">{{startdateTime}} - {{finishdateTime}}</div>
+			                </div>
+			                <div class="bottom">
+			                    
+			                    <a class="btn btn-warning"  href="#">
+			                        Reserve Now
+			                    </a>
+			                </div>
+			            </div>
+
+			       </div>
+		</script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>window.jQuery || document.write('<script src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"><\/script>')</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/bloodhound.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.jquery.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+		
+		<script type="text/javascript" src="http://spin.js.org/spin.min.js"></script>
+		<script type="text/javascript" src="/javascripts/main.js"></script>
+		
+		
+	
+  </body>
 </html>

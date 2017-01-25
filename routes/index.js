@@ -20,7 +20,7 @@ router.get('/airlines', function(req, res, next) {
 
   request({ uri: host + '/airlines' }, function(err, response, body){
 	
-	if(err != undefined){
+	if(err != undefined || response.statusCode != 200){
 			res.setHeader('Content-Type', 'application/json');
 			return res.status(500).send({ "error" : 500 , "description" : "Server Error"});
 	}
@@ -36,11 +36,16 @@ router.get('/airlines', function(req, res, next) {
 	@Params : []
 */
 router.get('/airports', function(req, res, next) {
-  if(err != undefined){
-		res.setHeader('Content-Type', 'application/json');
-		return res.status(500).send({ "error" : 500 , "description" : "Server Error"});
-  }
-  request({ uri: host + '/airports' }, function(err, response, body){
+  
+  req.checkQuery('q', 'Must have ').notEmpty();
+  var qname = req.query["q"];
+  
+  request({ uri: host + '/airports?q=' + qname }, function(err, response, body){
+	if(err != undefined || response.statusCode != 200 ){
+			res.setHeader('Content-Type', 'application/json');
+			return res.status(500).send({ "error" : 500 , "description" : "Server Error"});
+	}
+	
 	res.setHeader('Content-Type', 'application/json');
   	res.send(body);
   })
@@ -77,8 +82,8 @@ router.get('/search', function(req, res, next) {
 	// Get Airlines
 	request({ uri: host + '/airlines' }, function(err, response, body){
 
-		if(err != undefined){
-			res.setHeader('Content-Type', 'application/json');
+		if(err != undefined || response.statusCode != 200){
+			 res.setHeader('Content-Type', 'application/json');
 			 res.status(500).send({ "error" : 500 , "description" : "Server Error"});
 		}
 		
@@ -114,8 +119,10 @@ router.get('/search', function(req, res, next) {
 
 			// I know underscore :)
 			 _.each(results, function(result) {
-				var parsed_results = JSON.parse(result);
-				to_render.push( parsed_results );
+				try {
+				    var parsed_results = JSON.parse(result);
+					to_render.push( parsed_results );
+				  } catch (e) {}
 			 });
 			
 			to_render = _.flatten(to_render, true);
